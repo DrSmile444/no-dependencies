@@ -1,0 +1,25 @@
+{
+  "name": "no-dependencies",
+  "version": "1.1.0",
+  "description": "Allows you to publish packages without dependencies. Usefull when you publish a built bundle and don't want to install dependencies",
+  "main": "index.js",
+  "bin": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "dependencies",
+    "dev dependencies",
+    "publish",
+    "npm publish",
+    "npmjs",
+    "packages",
+    "no-dependecies"
+  ],
+  "author": "Dmytro Vakulenko",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^6.0.0"
+  }
+}
