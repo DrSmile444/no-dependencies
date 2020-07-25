@@ -8,6 +8,9 @@
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "url": "https://github.com/DrSmile444/no-dependencies"
+  },
   "keywords": [
     "dependencies",
     "dev dependencies",
@@ -18,7 +21,7 @@
     "no-dependecies"
   ],
   "author": "Dmytro Vakulenko",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "commander": "^6.0.0"
   }
