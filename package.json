@@ -1,6 +1,6 @@
 {
   "name": "no-dependencies",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Allows you to publish packages without dependencies. Usefull when you publish a built bundle and don't want to install dependencies",
   "main": "index.js",
   "bin": "index.js",

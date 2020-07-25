@@ -5,7 +5,7 @@ No Dependencies package allows you to publish your npm bundled packages without 
 ## Table of Contents:
 
 1.  [Goal](#goal)
-2.  [Quickstart](#quickstart)
+2.  [Quick Start](#quick-start)
     1. [Install](#install)
     2. [Usage](#usage)
     3. [Example](#example)
