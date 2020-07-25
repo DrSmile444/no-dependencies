@@ -2,6 +2,7 @@
 const fs = require('fs');
 const execSync = require('child_process').execSync;
 const commander = require('commander').program;
+const updateNotifier = require('update-notifier');
 
 const packageJsonFile = './package.json';
 const backupPackageJsonFile = './package.bak.json';
@@ -9,6 +10,8 @@ const resultPackageJsonFile = './package.result.json';
 const defaultCommand = 'npm publish';
 
 const packageJson = require(packageJsonFile);
+
+updateNotifier({ pkg: packageJson }).notify();
 
 commander.version(packageJson.version);
 commander
