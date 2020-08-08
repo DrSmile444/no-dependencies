@@ -46,19 +46,19 @@ class NoDependencies {
       delete projectPackageJson.devDependencies;
       this.logStep('Deleted dependencies from the ' + packageJsonFile);
     } else {
-      Object.keys(projectPackageJson.dependencies)
+      Object.keys(projectPackageJson.dependencies || {})
         .filter((dependency) => !includesDependencies.includes(dependency))
         .forEach((dependency) => delete projectPackageJson.dependencies[dependency]);
 
-      Object.keys(projectPackageJson.devDependencies)
+      Object.keys(projectPackageJson.devDependencies || {})
         .filter((dependency) => !includesDependencies.includes(dependency))
         .forEach((dependency) => delete projectPackageJson.devDependencies[dependency]);
 
-      if (Object.keys(projectPackageJson.dependencies).length === 0) {
+      if (Object.keys(projectPackageJson.dependencies || {}).length === 0) {
         delete projectPackageJson.dependencies;
       }
 
-      if (Object.keys(projectPackageJson.devDependencies).length === 0) {
+      if (Object.keys(projectPackageJson.devDependencies || {}).length === 0) {
         delete projectPackageJson.devDependencies;
       }
 
