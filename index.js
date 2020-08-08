@@ -7,7 +7,7 @@ const updateNotifier = require('update-notifier');
 const packageJsonFile = './package.json';
 const backupPackageJsonFile = './package.bak.json';
 const resultPackageJsonFile = './package.result.json';
-const defaultCommand = 'npm publish';
+const defaultCommand = process.env.NODE_ENV === 'development' ? 'echo 0' : 'npm publish';
 
 const packageJson = require(packageJsonFile);
 
