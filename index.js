@@ -18,10 +18,11 @@ commander
   .description(packageJson.description)
   .option('-b, --before', 'creates a package.json backup and deletes dependencies')
   .option('-e, --exec <command>', 'executes a specified command with a clean package.json. Default is: ' + defaultCommand)
+  .option('-i, --includes <dependencies>', 'dependencies that should be included as dependencies separated by comma: --includes commander,update-notifier')
   .option('-a, --after', 'returns back a backuped package.json')
   .option('-d, --debug', 'leaves backup and result files')
   .option('-c, --clear', 'cleares all temp files. Uses with or after the "--debug" command');
- 
+
 commander.parse(process.argv);
 
 
@@ -39,9 +40,32 @@ class NoDependencies {
     fs.copyFileSync(packageJsonFile, backupPackageJsonFile);
     this.logStep('Created a ' + backupPackageJsonFile);
 
-    delete projectPackageJson.dependencies;
-    delete projectPackageJson.devDependencies;
-    this.logStep('Deleted dependencies from the ' + packageJsonFile);
+    const includesDependencies = commander.includes && commander.includes.replace(/ /g, '').split(',');
+    if (!includesDependencies) {
+      delete projectPackageJson.dependencies;
+      delete projectPackageJson.devDependencies;
+      this.logStep('Deleted dependencies from the ' + packageJsonFile);
+    } else {
+      Object.keys(projectPackageJson.dependencies)
+        .filter((dependency) => !includesDependencies.includes(dependency))
+        .forEach((dependency) => delete projectPackageJson.dependencies[dependency]);
+
+      Object.keys(projectPackageJson.devDependencies)
+        .filter((dependency) => !includesDependencies.includes(dependency))
+        .forEach((dependency) => delete projectPackageJson.devDependencies[dependency]);
+
+      if (Object.keys(projectPackageJson.dependencies).length === 0) {
+        delete projectPackageJson.dependencies;
+      }
+
+      if (Object.keys(projectPackageJson.devDependencies).length === 0) {
+        delete projectPackageJson.devDependencies;
+      }
+
+      this.logStep('Deleted dependencies from the ' + packageJsonFile);
+      this.logStep('Included dependencies:' + includesDependencies);
+    }
+
 
     fs.writeFileSync(packageJsonFile, JSON.stringify(projectPackageJson, null, '  '));
     this.logStep(`Write a new ${packageJsonFile} without dependencies`);
